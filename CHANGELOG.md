@@ -1,6 +1,22 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.19.0 - 2026-04-22
+### Features
+* Introduced a new [`get_data_file`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk#get_data_file) method. This method returns the current SDK configuration (also known as the **data file**) used for evaluation and targeting. It is **not** intended for production use to fetch variations for every feature flag in the returned list, as it is not optimized for performance. For that purpose, use [`get_variations`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk#get_variations) instead. `get_data_file` is mainly useful for debugging or QA, for example to let internal users manually select a variant for a specific feature flag in production.
+* Added support for variation simulation when feature flags are **inactive (OFF state)** across the following methods:
+    - [`get_variation`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#get_variation)
+    - [`get_variations`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#get_variations)
+    - [`is_feature_active`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#is_feature_active)
+    - This support is also extended to the following **deprecated methods**:
+        - [`get_active_feature_list_for_visitor`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#get_active_feature_list_for_visitor)
+        - [`get_active_features`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#get_active_features)
+        - [`get_feature_variation_key`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#get_feature_variation_key)
+        - [`get_feature_variable`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#get_feature_variable)
+* Improved the performance of the [`get_data_file()`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#get_data_file) instance that is refreshed whenever the SDK configuration is updated.
+* Added a new `date_modified` property to the [`DataFile`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#datafile) object returned by the [`get_data_file`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#get_data_file) method.
+* The [`get_feature_list`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#get_feature_list) method has been deprecated in favor of `get_data_file()`.
+
 ## 3.18.0 - 2026-02-13
 ### Features
 * Updated the allowed range for the [`tracking_interval_millisecond`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#additional-configuration). The new range is from **`1000` ms** (default) to **`5000` ms**, allowing a reduction in the number of tracking requests.
