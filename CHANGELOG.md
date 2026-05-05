@@ -1,6 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.20.0 - 2026-05-05
+### Features
+* Added support for **during the current visit** and **during any of the last visits** settings across the following targeting conditions:
+  - Converted Goal
+  - Feature Flag
+  - Web Experiment
+  - Personalization
+  - Exclusive Campaign
+
 ## 3.19.0 - 2026-04-22
 ### Features
 * Introduced a new [`get_data_file`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk#get_data_file) method. This method returns the current SDK configuration (also known as the **data file**) used for evaluation and targeting. It is **not** intended for production use to fetch variations for every feature flag in the returned list, as it is not optimized for performance. For that purpose, use [`get_variations`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk#get_variations) instead. `get_data_file` is mainly useful for debugging or QA, for example to let internal users manually select a variant for a specific feature flag in production.
