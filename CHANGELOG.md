@@ -25,6 +25,9 @@ All notable changes to this project will be documented in this file.
 * Improved the performance of the [`get_data_file()`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#get_data_file) instance that is refreshed whenever the SDK configuration is updated.
 * Added a new `date_modified` property to the [`DataFile`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#datafile) object returned by the [`get_data_file`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#get_data_file) method.
 * The [`get_feature_list`](https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/python-sdk/#get_feature_list) method has been deprecated in favor of `get_data_file()`.
+### Bug fixes
+* Fixed an issue where permanently rejected Data API tracking requests (for example, responses with a `429` status code) prevented visitor sessions from being cleaned up. This could cause sessions to remain in memory indefinitely, leading to excessive RAM usage and potential server slowdowns.
+
 
 ## 3.18.0 - 2026-02-13
 ### Features
