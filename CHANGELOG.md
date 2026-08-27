@@ -1,6 +1,18 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.22.0 - 2026-08-27
+### Features
+* Added the new [`is_ready`][isReady] method, which returns `True` once the SDK has successfully loaded its configuration and is ready for use, and `False` otherwise (for example, while initialization is still in progress or has failed). Unlike [`wait_init`][waitInit], it returns immediately without blocking.
+* The `wait_init` and [`wait_init_async`][waitInitAsync] methods now accept an optional `timeout_milliseconds` parameter which bounds the wait. When it is not specified or negative, the config `default_timeout_millisecond` is applied.
+### Bug fixes
+* Targeting conditions of a type unsupported by the SDK (e.g. web-specific conditions) now evaluate to `False` instead of `True`, so visitors are no longer targeted by conditions the SDK cannot check.
+* The `wait_init` and `wait_init_async` methods now return `False` as soon as the SDK fails to load its configuration, without waiting for background retries to sleep out the timeout. The failure which prevented the SDK from initializing is reported to the log. Once the SDK becomes ready, a subsequent `wait_init` call returns `True`.
+
+[isReady]: https://docs.kameleoon.com/developer-docs/sdks/web-sdks/python-sdk#is_ready
+[waitInit]: https://docs.kameleoon.com/developer-docs/sdks/web-sdks/python-sdk#wait_init
+[waitInitAsync]: https://docs.kameleoon.com/developer-docs/sdks/web-sdks/python-sdk#wait_init_async
+
 ## 3.20.0 - 2026-05-05
 ### Features
 * Added support for **during the current visit** and **during any of the last visits** settings across the following targeting conditions:
