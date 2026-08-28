@@ -8,10 +8,19 @@ All notable changes to this project will be documented in this file.
 ### Bug fixes
 * Targeting conditions of a type unsupported by the SDK (e.g. web-specific conditions) now evaluate to `False` instead of `True`, so visitors are no longer targeted by conditions the SDK cannot check.
 * The `wait_init` and `wait_init_async` methods now return `False` as soon as the SDK fails to load its configuration, without waiting for background retries to sleep out the timeout. The failure which prevented the SDK from initializing is reported to the log. Once the SDK becomes ready, a subsequent `wait_init` call returns `True`.
+* `internal` Reduced the number of configuration fetch attempts per fetch from 3 to 2 (a single retry), so a fetch failure is reported to `wait_init` sooner.
+* Added support for SDK event handlers through the new [`set_event_handler`][setEventHandler] API:
+  - `EventType.DATAFILE_UPDATE` notifies when the SDK data file (configuration) is updated with [polling](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#polling-default-%E2%80%8B) or [streaming](https://docs.kameleoon.com/developer-docs/feature-experimentation/technical-reference/technical-considerations#streaming-premium-option-%E2%80%8B) modes.
+  - `EventType.HTTP_REQUEST` notifies when SDK HTTP requests complete successfully or fail.
+  - HTTP request events include the request type, HTTP status or failure details, and request duration.
+  - Passing `None` to `set_event_handler` clears the handler for the selected event type.
+* The [`on_update_configuration`](https://docs.kameleoon.com/developer-docs/sdks/web-sdks/python-sdk#on_update_configuration) method has been deprecated in favor of `set_event_handler` with the `EventType.DATAFILE_UPDATE` event type.
 
+[setEventHandler]: https://docs.kameleoon.com/developer-docs/sdks/web-sdks/python-sdk#set_event_handler
 [isReady]: https://docs.kameleoon.com/developer-docs/sdks/web-sdks/python-sdk#is_ready
 [waitInit]: https://docs.kameleoon.com/developer-docs/sdks/web-sdks/python-sdk#wait_init
 [waitInitAsync]: https://docs.kameleoon.com/developer-docs/sdks/web-sdks/python-sdk#wait_init_async
+
 
 ## 3.20.0 - 2026-05-05
 ### Features
