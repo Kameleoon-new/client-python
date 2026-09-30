@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.22.2 - 2026-09-30
+### Bug fixes
+* Fixed a false-positive `... has wrong JSON structure: 'None'` error log when the SDK loads a configuration containing a `BROWSER` or `SDK_LANGUAGE` targeting condition without a version. Such conditions are valid and were evaluated correctly; only the log message was spurious.
+
 ## 3.22.1 - 2026-09-11
 ### Bug fixes
 * Reduced the load on the Data API during its outages. After a failed tracking request, the SDK sends only one visitor's data per tracking request until a request succeeds, instead of retrying with a full-size (up to 2.5 MB) request on every tracking interval. Once the Data API is reachable again, the accumulated visitor data is sent in full-size requests as usual.
