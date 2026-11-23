@@ -1,6 +1,26 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 3.24.0 - 2026-11-23
+### Features
+* Added the "greater than or equal to" (`>=`) and "less than or equal to" (`<=`) operators to the following targeting conditions:
+  - App version
+  - SDK type
+  - Browser
+  - Custom data (number)
+  - Number of page views
+  - Total number of visits
+  - Number of visits today
+  - Elapsed time since first visit
+  - Elapsed time since last visit
+
+  These operators will be available in the Kameleoon app with the platform release planned for December 2026.
+### Bug fixes
+* Fixed the Custom data condition with a number operator ignoring a matching value when the custom data also contained a non-numeric value (for example, `["invalid", "10"]` did not match `= 10`). Non-numeric values are now skipped individually.
+* Numeric Custom data comparisons use native floating-point precision for all five operators. Equality now requires the same parsed value, so `9.9999999999` and `10` compare as distinct numbers.
+* A targeting condition with an unknown operator no longer raises an exception. An error is logged when such an operator is evaluated, and the condition is evaluated as not met.
+* Fixed a rare exception in a background thread when the real-time streaming connection was closed while it was being read.
+
 ## 3.23.0 - 2026-11-19
 ### Features
 * Real-time configuration streaming can now be enabled for server-side SDKs independently of client-side SDKs. The SDK reads the new `configUpdateMode` field of the configuration (`STREAMING` or `STREAMING_SERVER_ONLY` enables streaming) instead of `realTimeUpdate`.
